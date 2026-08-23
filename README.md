@@ -1,6 +1,8 @@
-# CognoDB Cloud Benchmark
+# CognoDB Cloud Benchmarks
 
 A reproducible benchmark suite comparing **[CognoDB Cloud](https://console.cognodb.com)** against four other managed graph database platforms on identical hardware tiers, identical datasets, and identical logical queries.
+
+
 
 | # | Platform | Protocol | Why it's in this comparison |
 |---|---|---|---|

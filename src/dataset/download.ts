@@ -5,6 +5,7 @@ import { pipeline } from "node:stream/promises";
 import { env } from "../config/env";
 import { logger } from "../utils/logger";
 
+// raw data directory, relative to the project root. This is where the downloaded
 const RAW_DIR = path.join(process.cwd(), "data", "raw");
 const SNAP_POKEC_URL = "https://snap.stanford.edu/data/soc-pokec-relationships.txt.gz";
 

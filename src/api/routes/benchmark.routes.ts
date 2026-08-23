@@ -11,6 +11,7 @@ import { writeReportFile } from "../../benchmarks/report";
 import { enabledPlatforms, PLATFORMS } from "../../config/platforms";
 import { env } from "../../config/env";
 
+
 export const benchmarkRouter = Router();
 
 const RESULTS_DIR = path.join(process.cwd(), "results");
