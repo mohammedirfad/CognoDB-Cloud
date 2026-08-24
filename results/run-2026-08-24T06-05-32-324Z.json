@@ -1,0 +1,533 @@
+{
+  "runAt": "2026-08-24T06:05:32.324Z",
+  "dataset": {
+    "nodeCount": 37500,
+    "edgeCount": 149990
+  },
+  "platforms": [
+    {
+      "platformId": "cognodb",
+      "displayName": "CognoDB Cloud",
+      "instanceSpec": "burstable 0.5 vCPU, 256 MB RAM, 1 GB disk (free c0 tier)",
+      "ingest": {
+        "nodesLoaded": 37500,
+        "edgesLoaded": 149990,
+        "wallClockMs": 56861.69,
+        "nodesPerSecond": 659.5,
+        "edgesPerSecond": 2637.8
+      },
+      "traversal": {
+        "hop1": {
+          "count": 120,
+          "meanMs": 256.52,
+          "minMs": 254.36,
+          "maxMs": 308.4,
+          "p50Ms": 255.99,
+          "p95Ms": 257.37,
+          "p99Ms": 259.41,
+          "stdDevMs": 4.83
+        },
+        "hop2": {
+          "count": 120,
+          "meanMs": 256.04,
+          "minMs": 254.04,
+          "maxMs": 275.98,
+          "p50Ms": 255.84,
+          "p95Ms": 257.31,
+          "p99Ms": 260.06,
+          "stdDevMs": 2.03
+        },
+        "hop3": {
+          "count": 120,
+          "meanMs": 256.9,
+          "minMs": 254.92,
+          "maxMs": 260.39,
+          "p50Ms": 256.8,
+          "p95Ms": 258.98,
+          "p99Ms": 260.15,
+          "stdDevMs": 1.04
+        }
+      },
+      "lookup": {
+        "pointLookup": {
+          "count": 120,
+          "meanMs": 256.98,
+          "minMs": 254.35,
+          "maxMs": 266.88,
+          "p50Ms": 257.02,
+          "p95Ms": 258.72,
+          "p99Ms": 262.83,
+          "stdDevMs": 1.59
+        },
+        "indexedLookup": {
+          "count": 120,
+          "meanMs": 295.15,
+          "minMs": 285.08,
+          "maxMs": 374.6,
+          "p50Ms": 291.73,
+          "p95Ms": 308.15,
+          "p99Ms": 353.97,
+          "stdDevMs": 14.47
+        }
+      },
+      "aggregation": {
+        "count": 120,
+        "meanMs": 306.17,
+        "minMs": 289.86,
+        "maxMs": 415.34,
+        "p50Ms": 296.03,
+        "p95Ms": 358.39,
+        "p99Ms": 402.05,
+        "stdDevMs": 23.58
+      },
+      "mixedWorkload": [
+        {
+          "concurrency": 1,
+          "durationSeconds": 30,
+          "totalOps": 114,
+          "readOps": 88,
+          "writeOps": 26,
+          "throughputQps": 3.8,
+          "errors": 0
+        },
+        {
+          "concurrency": 10,
+          "durationSeconds": 30.23,
+          "totalOps": 1111,
+          "readOps": 875,
+          "writeOps": 236,
+          "throughputQps": 36.76,
+          "errors": 0
+        },
+        {
+          "concurrency": 40,
+          "durationSeconds": 30.26,
+          "totalOps": 4440,
+          "readOps": 3500,
+          "writeOps": 940,
+          "throughputQps": 146.74,
+          "errors": 0
+        }
+      ],
+      "footprint": {
+        "storedDataMb": "not observable",
+        "memoryMb": "not observable",
+        "note": "Platform does not expose storage/memory metrics on this tier without APOC or an admin API."
+      }
+    },
+    {
+      "platformId": "neo4j",
+      "displayName": "Neo4j AuraDB Free",
+      "instanceSpec": "AuraDB Free: shared vCPU, 1 GB RAM, 1 GB storage",
+      "ingest": {
+        "nodesLoaded": 37500,
+        "edgesLoaded": 149990,
+        "wallClockMs": 19339.18,
+        "nodesPerSecond": 1939.07,
+        "edgesPerSecond": 7755.76
+      },
+      "traversal": {
+        "hop1": {
+          "count": 120,
+          "meanMs": 56.34,
+          "minMs": 53.4,
+          "maxMs": 98.99,
+          "p50Ms": 55.56,
+          "p95Ms": 57.33,
+          "p99Ms": 95.26,
+          "stdDevMs": 5.37
+        },
+        "hop2": {
+          "count": 120,
+          "meanMs": 56.11,
+          "minMs": 54.3,
+          "maxMs": 63.26,
+          "p50Ms": 55.9,
+          "p95Ms": 58.32,
+          "p99Ms": 60.16,
+          "stdDevMs": 1.18
+        },
+        "hop3": {
+          "count": 120,
+          "meanMs": 56.3,
+          "minMs": 54.05,
+          "maxMs": 112.21,
+          "p50Ms": 55.79,
+          "p95Ms": 57.21,
+          "p99Ms": 59.09,
+          "stdDevMs": 5.19
+        }
+      },
+      "lookup": {
+        "pointLookup": {
+          "count": 120,
+          "meanMs": 56.09,
+          "minMs": 53.31,
+          "maxMs": 112.03,
+          "p50Ms": 55.62,
+          "p95Ms": 57.35,
+          "p99Ms": 59.16,
+          "stdDevMs": 5.21
+        },
+        "indexedLookup": {
+          "count": 120,
+          "meanMs": 57.16,
+          "minMs": 54.91,
+          "maxMs": 112.96,
+          "p50Ms": 56.53,
+          "p95Ms": 58.91,
+          "p99Ms": 60.29,
+          "stdDevMs": 5.21
+        }
+      },
+      "aggregation": {
+        "count": 120,
+        "meanMs": 70.37,
+        "minMs": 66.96,
+        "maxMs": 128.78,
+        "p50Ms": 69.27,
+        "p95Ms": 75.01,
+        "p99Ms": 79.03,
+        "stdDevMs": 5.83
+      },
+      "mixedWorkload": [
+        {
+          "concurrency": 1,
+          "durationSeconds": 30.04,
+          "totalOps": 524,
+          "readOps": 408,
+          "writeOps": 116,
+          "throughputQps": 17.44,
+          "errors": 0
+        },
+        {
+          "concurrency": 10,
+          "durationSeconds": 30.05,
+          "totalOps": 5303,
+          "readOps": 4282,
+          "writeOps": 1021,
+          "throughputQps": 176.45,
+          "errors": 0
+        },
+        {
+          "concurrency": 40,
+          "durationSeconds": 30.05,
+          "totalOps": 20482,
+          "readOps": 16307,
+          "writeOps": 4175,
+          "throughputQps": 681.6,
+          "errors": 0
+        }
+      ],
+      "footprint": {
+        "storedDataMb": "not observable",
+        "memoryMb": "not observable",
+        "note": "Platform does not expose storage/memory metrics on this tier without APOC or an admin API."
+      }
+    },
+    {
+      "platformId": "memgraph",
+      "displayName": "Memgraph Cloud",
+      "instanceSpec": "Memgraph Cloud free tier: 0.5 vCPU, 256 MB RAM, 1 GB disk",
+      "ingest": {
+        "nodesLoaded": 37500,
+        "edgesLoaded": 149990,
+        "wallClockMs": 35472.44,
+        "nodesPerSecond": 1057.16,
+        "edgesPerSecond": 4228.35
+      },
+      "traversal": {
+        "hop1": {
+          "count": 120,
+          "meanMs": 166.46,
+          "minMs": 161.12,
+          "maxMs": 228.08,
+          "p50Ms": 163.03,
+          "p95Ms": 204.81,
+          "p99Ms": 206.14,
+          "stdDevMs": 11.57
+        },
+        "hop2": {
+          "count": 120,
+          "meanMs": 163.07,
+          "minMs": 161.13,
+          "maxMs": 169.1,
+          "p50Ms": 163.01,
+          "p95Ms": 164.25,
+          "p99Ms": 167.53,
+          "stdDevMs": 1.05
+        },
+        "hop3": {
+          "count": 120,
+          "meanMs": 163.85,
+          "minMs": 161.23,
+          "maxMs": 199.29,
+          "p50Ms": 162.94,
+          "p95Ms": 165.22,
+          "p99Ms": 197.1,
+          "stdDevMs": 4.92
+        }
+      },
+      "lookup": {
+        "pointLookup": {
+          "count": 120,
+          "meanMs": 163.56,
+          "minMs": 161.03,
+          "maxMs": 181.7,
+          "p50Ms": 162.97,
+          "p95Ms": 165.75,
+          "p99Ms": 179.22,
+          "stdDevMs": 2.83
+        },
+        "indexedLookup": {
+          "count": 120,
+          "meanMs": 167.82,
+          "minMs": 164.61,
+          "maxMs": 197.52,
+          "p50Ms": 166.7,
+          "p95Ms": 175.23,
+          "p99Ms": 195.76,
+          "stdDevMs": 4.62
+        }
+      },
+      "aggregation": {
+        "count": 120,
+        "meanMs": 176.1,
+        "minMs": 173.7,
+        "maxMs": 183.67,
+        "p50Ms": 175.9,
+        "p95Ms": 178.48,
+        "p99Ms": 182.39,
+        "stdDevMs": 1.42
+      },
+      "mixedWorkload": [
+        {
+          "concurrency": 1,
+          "durationSeconds": 30.14,
+          "totalOps": 167,
+          "readOps": 137,
+          "writeOps": 30,
+          "throughputQps": 5.54,
+          "errors": 0
+        },
+        {
+          "concurrency": 10,
+          "durationSeconds": 30.14,
+          "totalOps": 1830,
+          "readOps": 1460,
+          "writeOps": 370,
+          "throughputQps": 60.72,
+          "errors": 0
+        },
+        {
+          "concurrency": 40,
+          "durationSeconds": 30.15,
+          "totalOps": 7389,
+          "readOps": 5921,
+          "writeOps": 1468,
+          "throughputQps": 245.05,
+          "errors": 0
+        }
+      ],
+      "footprint": {
+        "storedDataMb": "not observable",
+        "memoryMb": "not observable",
+        "note": "SHOW STORAGE INFO unavailable on this tier"
+      }
+    },
+    {
+      "platformId": "arangodb",
+      "displayName": "ArangoDB Oasis",
+      "instanceSpec": "Oasis free trial: 2 vCPU / 2 GB RAM shared, capped to match smallest tier",
+      "ingest": {
+        "nodesLoaded": 0,
+        "edgesLoaded": 0,
+        "wallClockMs": 0,
+        "nodesPerSecond": 0,
+        "edgesPerSecond": 0
+      },
+      "traversal": {
+        "hop1": {
+          "count": 0,
+          "meanMs": 0,
+          "minMs": 0,
+          "maxMs": 0,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0,
+          "stdDevMs": 0
+        },
+        "hop2": {
+          "count": 0,
+          "meanMs": 0,
+          "minMs": 0,
+          "maxMs": 0,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0,
+          "stdDevMs": 0
+        },
+        "hop3": {
+          "count": 0,
+          "meanMs": 0,
+          "minMs": 0,
+          "maxMs": 0,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0,
+          "stdDevMs": 0
+        }
+      },
+      "lookup": {
+        "pointLookup": {
+          "count": 0,
+          "meanMs": 0,
+          "minMs": 0,
+          "maxMs": 0,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0,
+          "stdDevMs": 0
+        },
+        "indexedLookup": {
+          "count": 0,
+          "meanMs": 0,
+          "minMs": 0,
+          "maxMs": 0,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0,
+          "stdDevMs": 0
+        }
+      },
+      "aggregation": {
+        "count": 0,
+        "meanMs": 0,
+        "minMs": 0,
+        "maxMs": 0,
+        "p50Ms": 0,
+        "p95Ms": 0,
+        "p99Ms": 0,
+        "stdDevMs": 0
+      },
+      "mixedWorkload": [],
+      "footprint": {
+        "storedDataMb": "not observable",
+        "memoryMb": "not observable",
+        "note": "run failed"
+      },
+      "error": "ArangoError: AQL: collection not known to traversal: 'Person'. please add 'WITH Person' as the first line in your AQL [node #2: TraversalNode] [node #3: CalculationNode] [node #4: CollectNode] [node #5: ReturnNode] (while executing)"
+    },
+    {
+      "platformId": "falkordb",
+      "displayName": "FalkorDB Cloud",
+      "instanceSpec": "FalkorDB Cloud free tier: 0.5 vCPU, 256 MB RAM",
+      "ingest": {
+        "nodesLoaded": 37500,
+        "edgesLoaded": 149990,
+        "wallClockMs": 12043.37,
+        "nodesPerSecond": 3113.75,
+        "edgesPerSecond": 12454.15
+      },
+      "traversal": {
+        "hop1": {
+          "count": 120,
+          "meanMs": 31.08,
+          "minMs": 28.8,
+          "maxMs": 33.9,
+          "p50Ms": 31.19,
+          "p95Ms": 32.51,
+          "p99Ms": 33.17,
+          "stdDevMs": 1.08
+        },
+        "hop2": {
+          "count": 120,
+          "meanMs": 31.26,
+          "minMs": 28.64,
+          "maxMs": 38,
+          "p50Ms": 31.15,
+          "p95Ms": 33.07,
+          "p99Ms": 36.79,
+          "stdDevMs": 1.4
+        },
+        "hop3": {
+          "count": 120,
+          "meanMs": 31.23,
+          "minMs": 28.66,
+          "maxMs": 34.15,
+          "p50Ms": 31.13,
+          "p95Ms": 32.33,
+          "p99Ms": 33.67,
+          "stdDevMs": 0.83
+        }
+      },
+      "lookup": {
+        "pointLookup": {
+          "count": 120,
+          "meanMs": 30.84,
+          "minMs": 28.46,
+          "maxMs": 33.43,
+          "p50Ms": 30.99,
+          "p95Ms": 32.73,
+          "p99Ms": 33.11,
+          "stdDevMs": 0.99
+        },
+        "indexedLookup": {
+          "count": 120,
+          "meanMs": 32.34,
+          "minMs": 29.8,
+          "maxMs": 37.64,
+          "p50Ms": 32.7,
+          "p95Ms": 34.23,
+          "p99Ms": 35.66,
+          "stdDevMs": 1.38
+        }
+      },
+      "aggregation": {
+        "count": 120,
+        "meanMs": 37.62,
+        "minMs": 34.74,
+        "maxMs": 40.73,
+        "p50Ms": 37.84,
+        "p95Ms": 39.1,
+        "p99Ms": 39.92,
+        "stdDevMs": 0.99
+      },
+      "mixedWorkload": [
+        {
+          "concurrency": 1,
+          "durationSeconds": 30.02,
+          "totalOps": 959,
+          "readOps": 746,
+          "writeOps": 213,
+          "throughputQps": 31.95,
+          "errors": 0
+        },
+        {
+          "concurrency": 10,
+          "durationSeconds": 30.01,
+          "totalOps": 9620,
+          "readOps": 7774,
+          "writeOps": 1846,
+          "throughputQps": 320.55,
+          "errors": 0
+        },
+        {
+          "concurrency": 40,
+          "durationSeconds": 30.02,
+          "totalOps": 38516,
+          "readOps": 30947,
+          "writeOps": 7569,
+          "throughputQps": 1283.1,
+          "errors": 0
+        }
+      ],
+      "footprint": {
+        "storedDataMb": "not observable",
+        "memoryMb": null,
+        "note": "via GRAPH.MEMORY USAGE"
+      }
+    }
+  ],
+  "skipped": []
+}

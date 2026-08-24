@@ -21,14 +21,48 @@ export class FalkorDBAdapter implements GraphAdapter {
     if (!env.FALKORDB_URL) {
       throw new Error("FalkorDB is not configured: set FALKORDB_URL in .env");
     }
-    this.client = createClient({ url: env.FALKORDB_URL });
-    this.client.on("error", (err) => log.error({ err: String(err) }, "redis client error"));
+
+    this.client = createClient({
+      url: env.FALKORDB_URL,
+      socket: {
+        // Fail a single connection attempt after 10s rather than hanging.
+        connectTimeout: 10_000,
+        // node-redis retries forever by default, which turns a bad
+        // hostname/DNS failure into an infinite error-log spam loop that
+        // never lets the CLI move on to the next platform. Give up after 3
+        // attempts and surface a real Error instead.
+        reconnectStrategy: (retries) => {
+          if (retries >= 3) {
+            return new Error("FalkorDB: giving up after 3 failed connection attempts");
+          }
+          return Math.min(retries * 500, 2000);
+        },
+      },
+    });
+
+    // Only log the first error to avoid spamming the console during the
+    // bounded retry window above; the final failure still surfaces because
+    // `connect()` rejects once reconnectStrategy returns an Error.
+    let loggedOnce = false;
+    this.client.on("error", (err) => {
+      if (!loggedOnce) {
+        log.error({ err: String(err) }, "redis client error (further retries logged at debug level)");
+        loggedOnce = true;
+      } else {
+        log.debug({ err: String(err) }, "redis client retry error");
+      }
+    });
+
     await this.client.connect();
     log.info("connected");
   }
 
   async disconnect(): Promise<void> {
-    await this.client?.quit();
+    try {
+      await this.client?.quit();
+    } catch {
+      // Client never successfully connected - nothing to close.
+    }
   }
 
   private async query(cypher: string, params: Record<string, unknown> = {}): Promise<unknown[][]> {

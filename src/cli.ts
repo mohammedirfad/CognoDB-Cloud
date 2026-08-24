@@ -23,12 +23,33 @@ program
     }
     const { nodes, edges } = loadPreparedDataset();
     const adapters = buildEnabledAdapters();
+    const failures: { adapter: string; error: string }[] = [];
+
     for (const adapter of adapters) {
-      logger.info({ adapter: adapter.id }, "connecting");
-      await adapter.connect();
-      const result = await benchmarkIngest(adapter, nodes, edges);
-      logger.info({ adapter: adapter.id, ...result }, "load complete");
-      await adapter.disconnect();
+      try {
+        logger.info({ adapter: adapter.id }, "connecting");
+        await adapter.connect();
+        const result = await benchmarkIngest(adapter, nodes, edges);
+        logger.info({ adapter: adapter.id, ...result }, "load complete");
+        await adapter.disconnect();
+      } catch (err) {
+        // One platform's bad credentials/connectivity should not stop the
+        // others from loading - same resilience policy as `bench:run`.
+        logger.error({ adapter: adapter.id, err: String(err) }, "load failed for this platform - continuing with the rest");
+        failures.push({ adapter: adapter.id, error: String(err) });
+        try {
+          await adapter.disconnect();
+        } catch {
+          // already disconnected or never connected - ignore
+        }
+      }
+    }
+
+    if (failures.length > 0) {
+      logger.warn({ failures }, "load finished with one or more platform failures - check credentials/instance status for these");
+      process.exitCode = 1;
+    } else {
+      logger.info("load complete for all configured platforms");
     }
   });
 

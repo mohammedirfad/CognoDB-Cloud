@@ -57,7 +57,11 @@ export class BoltAdapter implements GraphAdapter {
     return this.driver.session({ database: this.config.database });
   }
 
-  private async run<T = unknown>(query: string, params: Record<string, unknown> = {}): Promise<T[]> {
+  private async run<T = unknown>(
+    query: string,
+    params: Record<string, unknown> = {},
+    opts: { retries?: number } = {},
+  ): Promise<T[]> {
     return withRetry(
       async () => {
         const session = this.session();
@@ -68,7 +72,7 @@ export class BoltAdapter implements GraphAdapter {
           await session.close();
         }
       },
-      { label: `${this.id}:query` },
+      { label: `${this.id}:query`, retries: opts.retries },
     );
   }
 
@@ -187,9 +191,13 @@ export class BoltAdapter implements GraphAdapter {
       return { storedDataMb: "not observable", memoryMb: "not observable", note: "SHOW STORAGE INFO unavailable on this tier" };
     }
     try {
+      // No point retrying "procedure not found" - it's not transient, so
+      // skip straight to a single attempt and fall back on failure.
       const res = await this.run<{ store: number }>(
         "CALL apoc.monitor.store() YIELD stringStoreSize, nodeStoreSize, relStoreSize, propStoreSize " +
           "RETURN (stringStoreSize + nodeStoreSize + relStoreSize + propStoreSize) AS store",
+        {},
+        { retries: 0 },
       );
       const bytes = res[0]?.store;
       if (typeof bytes === "number") {

@@ -90,7 +90,8 @@ export class ArangoDBAdapter implements GraphAdapter {
 
   async traversal(startId: string, hops: 1 | 2 | 3): Promise<number> {
     const res = await this.query<number>(
-      `FOR v IN 1..@hops OUTBOUND CONCAT('Person/', @id) Follows
+      `WITH Person
+       FOR v IN 1..@hops OUTBOUND CONCAT('Person/', @id) Follows
          RETURN DISTINCT v._key`,
       { id: startId, hops },
     );
